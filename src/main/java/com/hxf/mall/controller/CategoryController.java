@@ -22,7 +22,7 @@ public class CategoryController {
      */
     @RequestMapping("categories")
     @ResponseBody
-    public PageInfo getAll(@RequestParam(value = "start",defaultValue = "0")int start, @RequestParam(value = "size",defaultValue = "5")int size){
+    public PageInfo getAll(@RequestParam(value = "start",defaultValue = "1")int start, @RequestParam(value = "size",defaultValue = "5")int size){
         PageHelper.startPage(start,size);
         PageInfo<Category> page = new PageInfo<>(categoryService.listAll());
         return page;
