@@ -26,6 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category add(Category category) {
-        return categoryMapper.add(category);
+        categoryMapper.add(category);
+        return category;
     }
 }

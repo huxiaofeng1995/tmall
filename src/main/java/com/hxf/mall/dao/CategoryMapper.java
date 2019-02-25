@@ -8,5 +8,5 @@ import java.util.List;
 public interface CategoryMapper {
     public List<Category> listAll();
     public int total();
-    public Category add(Category category);
+    public void add(Category category);
 }

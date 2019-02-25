@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hxf.mall.dao.CategoryMapper">
-    <select id="listAll" resultType="Category">
+    <select id="listAll" resultType="com.hxf.mall.entity.Category">
         select * from category
     </select>
     <select id="total" resultType="int">
         select count(*) from category
     </select>
-    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
-        insert into category(name) values (#(name))
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="com.hxf.mall.entity.Category">
+        insert into category(name) values (#{name})
     </insert>
 </mapper>

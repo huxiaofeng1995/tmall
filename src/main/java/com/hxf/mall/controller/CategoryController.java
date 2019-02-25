@@ -6,11 +6,14 @@ import com.hxf.mall.entity.Category;
 import com.hxf.mall.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+
+@RestController
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -20,11 +23,27 @@ public class CategoryController {
      * @start 当前页数
      * @size 每页个数
      */
-    @RequestMapping("categories")
-    @ResponseBody
+    @RequestMapping(value = "categories", method = RequestMethod.GET)
     public PageInfo getAll(@RequestParam(value = "start",defaultValue = "1")int start, @RequestParam(value = "size",defaultValue = "5")int size){
         PageHelper.startPage(start,size);
         PageInfo<Category> page = new PageInfo<>(categoryService.listAll());
         return page;
     }
+
+    @RequestMapping(value = "categories",method = RequestMethod.POST)
+    public Category addCategory(Category category, MultipartFile image, HttpServletRequest request){
+        String uploadPath = request.getServletContext().getRealPath("img/category");
+        categoryService.add(category);
+        File file = new File(uploadPath, category.getId()+".jpg");
+        if(!file.getParentFile().exists()){
+            file.getParentFile().mkdirs();
+        }
+        try {
+            image.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
 }
