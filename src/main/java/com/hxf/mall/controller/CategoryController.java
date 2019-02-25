@@ -62,4 +62,33 @@ public class CategoryController {
         return null;
     }
 
+    @RequestMapping(value = "categories/{id}",method = RequestMethod.GET)
+    public Category getCategory(@PathVariable Integer id, HttpServletRequest request){
+        return categoryService.getCategoryById(id);
+    }
+
+    @RequestMapping(value = "categories/{id}",method = RequestMethod.PUT)
+    public Category updateCategory(@PathVariable Integer id, Category category, MultipartFile image, HttpServletRequest request){
+        //这里获取参数用的是 request.getParameter("name"). 为什么不用 add里的注入一个 Category对象呢？ 因为。。。PUT 方式注入不了
+        String name = request.getParameter("name");
+        category.setId(id);
+        category.setName(name);
+        categoryService.update(category);
+        if(image != null) {
+            String uploadPath = request.getServletContext().getRealPath("img/category");
+
+            File file = new File(uploadPath, category.getId() + ".jpg");
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            try {
+                image.transferTo(file);
+                BufferedImage img = ImageUtil.change2jpg(file);
+                ImageIO.write(img, "jpg", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return category;
+    }
 }

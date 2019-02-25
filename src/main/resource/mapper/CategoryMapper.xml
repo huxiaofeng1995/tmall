@@ -17,4 +17,10 @@
     <delete id="delete">
         delete from category where id = #{id}
     </delete>
+    <select id="getCategoryById" parameterType="Integer" resultType="com.hxf.mall.entity.Category">
+        select * from category where id = #{id}
+    </select>
+    <update id="update" parameterType="com.hxf.mall.entity.Category">
+        update category set name = #{name} where id = #{id}
+    </update>
 </mapper>

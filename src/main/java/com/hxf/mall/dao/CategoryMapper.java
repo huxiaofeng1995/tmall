@@ -11,4 +11,8 @@ public interface CategoryMapper {
     public void add(Category category);
 
     void delete(Integer id);
+
+    Category getCategoryById(Integer id);
+
+    void update(Category category);
 }
