@@ -51,4 +51,15 @@ public class CategoryController {
         return category;
     }
 
+    @RequestMapping(value = "categories/{id}",method = RequestMethod.DELETE)
+    public String delCategory(@PathVariable Integer id, HttpServletRequest request){
+        String uploadPath = request.getServletContext().getRealPath("img/category");
+        categoryService.delete(id);
+        File file = new File(uploadPath, id +".jpg");
+        if(file.getParentFile().exists()){
+            file.delete();
+        }
+        return null;
+    }
+
 }

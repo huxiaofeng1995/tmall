@@ -9,4 +9,6 @@ public interface CategoryMapper {
     public List<Category> listAll();
     public int total();
     public void add(Category category);
+
+    void delete(Integer id);
 }

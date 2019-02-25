@@ -5,7 +5,7 @@
 
 <mapper namespace="com.hxf.mall.dao.CategoryMapper">
     <select id="listAll" resultType="com.hxf.mall.entity.Category">
-        select * from category
+        select * from category order by id desc
     </select>
     <select id="total" resultType="int">
         select count(*) from category
@@ -13,4 +13,8 @@
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="com.hxf.mall.entity.Category">
         insert into category(name) values (#{name})
     </insert>
+
+    <delete id="delete">
+        delete from category where id = #{id}
+    </delete>
 </mapper>

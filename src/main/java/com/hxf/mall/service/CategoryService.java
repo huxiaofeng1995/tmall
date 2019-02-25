@@ -10,4 +10,6 @@ public interface CategoryService {
     public List<Category> listAll();
     public int total();
     public Category add(Category category);
+
+    void delete(Integer id);
 }
