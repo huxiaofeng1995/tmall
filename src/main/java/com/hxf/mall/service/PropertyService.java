@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface PropertyService {
     public List<Property> getProperties(Integer cid);
+
+    void addProperty(Property property);
+
+    void delProperty(Integer id);
 }

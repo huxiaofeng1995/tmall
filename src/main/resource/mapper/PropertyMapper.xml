@@ -8,4 +8,11 @@
         select * from property where cid = #{cid} order by id desc
     </select>
 
+    <insert id="insert_property" parameterType="com.hxf.mall.entity.Property" keyProperty="id" useGeneratedKeys="true">
+        insert into property(name,cid) VALUES (#{name},#{category.id})
+    </insert>
+
+    <delete id="delete_property">
+        delete from property where id=#{id}
+    </delete>
 </mapper>

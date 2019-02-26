@@ -18,4 +18,14 @@ public class PropertyServiceImpl implements PropertyService{
     public List<Property> getProperties(Integer cid) {
         return propertyMapper.select_property_list(cid);
     }
+
+    @Override
+    public void addProperty(Property property) {
+        propertyMapper.insert_property(property);
+    }
+
+    @Override
+    public void delProperty(Integer id) {
+        propertyMapper.delete_property(id);
+    }
 }
