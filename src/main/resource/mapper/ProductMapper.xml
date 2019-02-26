@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hxf.mall.dao.ProductMapper">
+    <select id="select_product_list" parameterType="Integer" resultType="com.hxf.mall.entity.Product">
+        select * from product where cid = #{cid} order by id desc
+    </select>
+
+    <insert id="insert_product" parameterType="com.hxf.mall.entity.Product" keyProperty="id" useGeneratedKeys="true">
+        insert into product(name,cid,subTitle,originalPrice,promotePrice,stock) VALUES (#{name},#{category.id},#{subTitle},#{originalPrice},#{promotePrice},#{stock})
+    </insert>
+
+    <delete id="delete_product">
+        delete from product where id=#{id}
+    </delete>
+
+    <select id="select_product_by_id" parameterType="Integer" resultMap="productWithCategory">
+        select p.id id,p.name name,p.*,c.id cid,c.name cname from product p left join category c on p.cid=c.id where p.id = #{id}
+    </select>
+
+    <update id="update_product" parameterType="com.hxf.mall.entity.Product">
+        update product set name=#{name},subTitle=#{subTitle},originalPrice=#{originalPrice},promotePrice=#{promotePrice},stock=#{stock} where id =#{id}
+    </update>
+
+    <resultMap id="productWithCategory" type="com.hxf.mall.entity.Product" autoMapping="true"><!--使用自动映射,注意查询结果集中重复的字段名要摘出来区分映射  -->
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <association property="category" javaType="com.hxf.mall.entity.Category">
+            <id column="cid" property="id"></id>
+            <result column="cname" property="name"></result>
+        </association>
+    </resultMap>
+</mapper>
