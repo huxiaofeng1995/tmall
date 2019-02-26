@@ -10,4 +10,8 @@ public interface PropertyService {
     void addProperty(Property property);
 
     void delProperty(Integer id);
+
+    Property getProperty(Integer id);
+
+    void updateProperty(Property property);
 }

@@ -28,4 +28,15 @@ public class PropertyServiceImpl implements PropertyService{
     public void delProperty(Integer id) {
         propertyMapper.delete_property(id);
     }
+
+    @Override
+    public Property getProperty(Integer id) {
+        return propertyMapper.select_property_by_id(id);
+    }
+
+    @Override
+    public void updateProperty(Property property) {
+        propertyMapper.update_property(property);
+
+    }
 }

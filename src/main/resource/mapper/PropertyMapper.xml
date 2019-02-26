@@ -15,4 +15,21 @@
     <delete id="delete_property">
         delete from property where id=#{id}
     </delete>
+
+    <select id="select_property_by_id" parameterType="Integer" resultMap="propertyWithCategory">
+        select p.id id,p.name name,c.id cid,c.name cname from property p left join category c on p.cid=c.id where p.id = #{id}
+    </select>
+
+    <update id="update_property" parameterType="com.hxf.mall.entity.Property">
+        update property set name=#{name} where id =#{id}
+    </update>
+
+    <resultMap id="propertyWithCategory" type="com.hxf.mall.entity.Property">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <association property="category" javaType="com.hxf.mall.entity.Category">
+            <id column="cid" property="id"></id>
+            <result column="cname" property="name"></result>
+        </association>
+    </resultMap>
 </mapper>

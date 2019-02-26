@@ -33,4 +33,15 @@ public class PropertyController {
         propertyService.delProperty(id);
         return null;
     }
+
+    @GetMapping("properties/{id}")
+    public Property getProperty(@PathVariable Integer id){
+        return propertyService.getProperty(id);
+    }
+
+    @PutMapping("properties")
+    public String updateProperty(@RequestBody Property property){
+        propertyService.updateProperty(property);
+        return "success";
+    }
 }

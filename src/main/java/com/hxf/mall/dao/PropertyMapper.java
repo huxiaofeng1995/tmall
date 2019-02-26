@@ -10,4 +10,8 @@ public interface PropertyMapper {
     void insert_property(Property property);
 
     void delete_property(Integer id);
+
+    Property select_property_by_id(Integer id);
+
+    void update_property(Property property);
 }
