@@ -74,6 +74,7 @@ public class CategoryController {
         category.setId(id);
         category.setName(name);
         categoryService.update(category);
+        //如果选择了上传图片，就更新图片，如果没有选择，就保留原图片不变
         if(image != null) {
             String uploadPath = request.getServletContext().getRealPath("img/category");
 
