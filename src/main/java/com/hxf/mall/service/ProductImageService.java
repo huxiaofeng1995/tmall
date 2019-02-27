@@ -7,4 +7,10 @@ import java.util.Map;
 
 public interface ProductImageService {
     List<ProductImage> listProductImage(Map params);
+
+    void addProductImage(ProductImage bean);
+
+    void delProductImage(Integer id);
+
+    ProductImage getProductImage(Integer id);
 }

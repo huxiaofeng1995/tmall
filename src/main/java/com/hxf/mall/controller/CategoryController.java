@@ -56,7 +56,7 @@ public class CategoryController {
         String uploadPath = request.getServletContext().getRealPath("img/category");
         categoryService.delete(id);
         File file = new File(uploadPath, id +".jpg");
-        if(file.getParentFile().exists()){
+        if(file.exists()){
             file.delete();
         }
         return null;

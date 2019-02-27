@@ -7,4 +7,16 @@
     <select id="select_productimage_by_type" resultType="ProductImage">
         select * from productimage where pid = #{pid} and type = #{type} order by id desc
     </select>
+
+    <insert id="insert_productimage" keyProperty="id" useGeneratedKeys="true" parameterType="ProductImage">
+        insert into productimage (type,pid) VALUES (#{type},#{product.id})
+    </insert>
+
+    <delete id="delete_productimage">
+        delete from productimage where id = #{id}
+    </delete>
+
+    <select id="select_productimage_by_id" resultType="ProductImage">
+        select * from productimage where id = #{id}
+    </select>
 </mapper>

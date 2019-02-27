@@ -19,4 +19,19 @@ public class ProductImageServiceImpl implements ProductImageService{
     public List<ProductImage> listProductImage(Map params) {
         return productImageMapper.select_productimage_by_type(params);
     }
+
+    @Override
+    public void addProductImage(ProductImage productImage) {
+        productImageMapper.insert_productimage(productImage);
+    }
+
+    @Override
+    public void delProductImage(Integer id) {
+        productImageMapper.delete_productimage(id);
+    }
+
+    @Override
+    public ProductImage getProductImage(Integer id) {
+        return productImageMapper.select_productimage_by_id(id);
+    }
 }
