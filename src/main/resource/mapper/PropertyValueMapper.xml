@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hxf.mall.dao.PropertyValueMapper">
+    <select id="select_propertyvalue_list_by_pid" parameterType="Integer" resultMap="myPropertyValue">
+        select pv.id id,pv.value value,pid,pt.id ptid,pt.name ptname from propertyvalue pv left join property pt on ptid = pt.id where pid = #{pid}
+    </select>
+
+    <resultMap id="myPropertyValue" type="com.hxf.mall.entity.PropertyValue">
+        <id column="id" property="id"></id>
+        <result column="value" property="value"></result>
+        <association property="product" javaType="com.hxf.mall.entity.Product">
+            <id column="pid" property="id"></id>
+        </association>
+        <association property="property" javaType="com.hxf.mall.entity.Property">
+            <id column="ptid" property="id"></id>
+            <result column="ptname" property="name"></result>
+        </association>
+    </resultMap>
+
+    <update id="update_propertyvalue" parameterType="PropertyValue">
+        update propertyvalue set value = #{value} where id = #{id}
+    </update>
+</mapper>
