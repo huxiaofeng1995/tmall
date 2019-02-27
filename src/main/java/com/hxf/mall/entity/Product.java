@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Product {
 
-    int id;
+	Integer id;
 	private Category category;
 	private String name;
 	private String subTitle;
@@ -14,11 +14,11 @@ public class Product {
 	private Date createDate;
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
