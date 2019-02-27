@@ -46,4 +46,10 @@ public class AdminPageController {
 	public String editPropertyValue(){
 		return "admin/editPropertyValue";
 	}
+
+	@GetMapping(value="/admin_user_list")
+	public String listUser(){
+		return "admin/listUser";
+
+	}
 }
