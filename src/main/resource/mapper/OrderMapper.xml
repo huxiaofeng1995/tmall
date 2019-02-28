@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hxf.mall.dao.OrderMapper">
+    <select id="select_order_list"  resultMap="myOrderMap">
+        select o.id id,o.*,i.id itemid,i.number itemnumber,p.id pid,p.name pname,p.*,u.id uid,u.name uname,u.* ,c.id cid,c.name cname from order_ o
+        left join orderitem i on o.id = i.oid
+        left join product p on i.pid = p.id
+        left join user u on o.uid = u.id
+        left join category c on p.cid = c.id
+    </select>
+    <resultMap id="myOrderMap" type="com.hxf.mall.entity.Order" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="user" javaType="com.hxf.mall.entity.User" autoMapping="true">
+            <id property="id" column="uid"/>
+            <result property="name" column="uname"/>
+        </association>
+        <collection property="orderItems" ofType="com.hxf.mall.entity.OrderItem" autoMapping="true">
+            <id column="itemid" property="id"/>
+            <result property="number" column="itemnumber"/>
+            <association property="product" javaType="com.hxf.mall.entity.Product" autoMapping="true">
+                <id property="id" column="pid"/>
+                <result property="name" column="pname"/>
+                <association property="category" javaType="com.hxf.mall.entity.Category" autoMapping="true">
+                    <id property="id" column="cid"/>
+                    <result property="name" column="cname"/>
+                </association>
+            </association>
+            <association property="user" javaType="com.hxf.mall.entity.User" autoMapping="true">
+                <id property="id" column="uid"/>
+                <result property="name" column="uname"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <update id="update_order" parameterType="Order">
+        update order_ set deliveryDate = #{deliveryDate}, status = #{status} where id = #{id}
+    </update>
+</mapper>
